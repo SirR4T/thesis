@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}\setlength{\itemsep}{-1ex}\small
+
+\bibitem{Alpher02}
+A.~Alpher.
+\newblock Frobnication.
+\newblock {\em Journal of Foo}, 12(1):234--778, 2002.
+
+\bibitem{Authors06}
+Authors.
+\newblock The frobnicatable foo filter.
+\newblock 2006.
+\newblock ECCV06 submission ID 324. Supplied as additional material {\tt
+  eccv06.pdf}.
+
+\bibitem{S79:HtSaS}
+A.~Shamir.
+\newblock {H}ow to {S}hare a {S}ecret.
+\newblock {\em Communications of the ACM}, 22:612--613, 1979.
+
+\end{thebibliography}

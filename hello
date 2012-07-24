@@ -1,0 +1,16 @@
+
+1. Introduction
+2. Primitives from SMPC
+	2.1 OT
+	2.2 LSSS
+	2.3 Maximum
+	2.4 Union
+	2.5 others?
+3. Primitives from Robotics
+	3.1 Localization
+	3.2 Active Localization
+4. Framework
+	4.1 What/when/how to share?
+	4.2 Complexity analysis?
+5. Conclusions
+6. References

@@ -1,0 +1,55 @@
+
+
+\section{SMPC Primitives}
+\label{sec:smpc-prim}
+
+\subsection{Oblivious Transfer}
+\label{sec:ot-prim}
+
+\subsection{Shamir's Secret Sharing}
+\label{sec:sss-prim}
+In~\cite{S79:HtSaS}, Shamir proposes a way of sharing a secret among $n$ 
+players, such that any $k$ or more players can reconstruct the secret,
+but no set of $k-1$ or less players can do so. This is called a $(k,n)$ 
+{\it secret sharing scheme}, and is achieved by using $k-1$ degree polynomials
+as described follows: 
+
+\begin{algorithm}
+\caption{On sharing a secret}
+\label{algshare}
+\begin{algorithmic}
+\REQUIRE A player has a secret value $v$ which he has to share
+\STATE select a random number $r$
+\STATE $f(x) = v + r_{1}x + r_{2}x^{2} + \ldots + r_{k-1}x^{k-1}$
+\FOR{all players $i$}
+	\STATE send the value $v_{i}= f(i) = v + r_{1}i + r_{2}i^{2} + \ldots + r_{k-1}i^{k-1}$ to player $i$
+\ENDFOR
+\ENSURE each player $i$ has a share $v_{i}$ of the secret $v$
+\end{algorithmic}
+\end{algorithm}
+
+The player who wishes to share a secret first chooses a $k-1$ degree
+secret random polynomial (by choosing the $k-1$ coefficients $r_1$ to $r_k$),
+say $f(x)$,
+and sets the constant term to the value of the secret. He then calculates
+the value of the ``share'' to be sent to each player $i$, as $f(i)$. With
+this, it is ensured that each player has a ``share'' of the secret, which
+he may reconstruct if and only if atleast $k-1$ other players are willing
+to do so.
+
+Notice, that
+a $k-1$ degree polynomial's equation can be reconstructed with the knowledge
+of any $k$ points on the curve (as in the case of any $k$ players colluding),
+but any set of $k-1$ or less points will yield no information
+about the equation of the curve (which means that any set of $k-1$ players
+or less will not be able to reconstruct the secret!), and thus the objective
+is achieved.
+
+\subsubsection{Secret Addition}
+\label{sec:add-prim}
+
+\subsubsection{Secret Multiplication}
+\label{sec:mult-prim}
+
+\subsection{Privacy Preserving Union}
+\label{sec:union-prim}
