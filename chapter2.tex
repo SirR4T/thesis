@@ -8,6 +8,11 @@
 
 \subsection{Shamir's Secret Sharing}
 \label{sec:sss-prim}
+This SMPC primitive addresses the following problem: suppose a group of
+treasure hunters would like to lock a safe in such a way that it can't 
+be opened unless there are atleast five (say) of them present at any given time. 
+How many locks and keys would be required for this?
+
 In~\cite{S79:HtSaS}, Shamir proposes a way of sharing a secret among $n$ 
 players, such that any $k$ or more players can reconstruct the secret,
 but no set of $k-1$ or less players can do so. This is called a $(k,n)$ 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.1)  24 JUL 2012 16:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.1)  24 JUL 2012 19:26
 entering extended mode
  %&-line parsing enabled.
 **sampleThesis.tex
@@ -366,50 +366,51 @@ Underfull \vbox (badness 1033) has occurred while \output is active []
 [2]
 {\it Chapter} 2.
 (./chapter2.tex
-Overfull \hbox (14.22636pt too wide) detected at line 29
+Overfull \hbox (14.22636pt too wide) detected at line 34
 [][]
  []
 
-) [3
+[3
 
-]
+]) [4]
 {\it Chapter} 3.
-(./chapter3.tex) [4
+(./chapter3.tex) [5
 
 ]
 {\it Chapter} 4.
-(./chapter4.tex) [5
+(./chapter4.tex) [6
 
 ]
 {\it Chapter} 5.
-(./conclusion.tex) [6
+(./conclusion.tex) [7
 
-] (./relatedPapers.tex) (./sampleThesis.bbl [7
+] (./relatedPapers.tex) (./sampleThesis.bbl [8
 
-]) [8
+]) [9
 
 ]
 (./sampleThesis.aux) ) 
 Here is how much of TeX's memory you used:
  3976 strings out of 494979
  53792 string characters out of 1180760
- 119648 words of memory out of 3000000
+ 120648 words of memory out of 3000000
  7052 multiletter control sequences out of 15000+50000
  34489 words of font info for 77 fonts, out of 3000000 for 9000
  73 hyphenation exceptions out of 8191
- 44i,10n,42p,230b,481s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,42p,230b,479s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</u
 sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/te
 xmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/
 public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb><
-/usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-tex
-live/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw
-/times/utmri8a.pfb>
-Output written on sampleThesis.pdf (17 pages, 121805 bytes).
+ts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/t
+exmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/t
+ype1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri
+8a.pfb>
+Output written on sampleThesis.pdf (18 pages, 131419 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
+ 102 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
