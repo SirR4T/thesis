@@ -21,3 +21,4 @@ clean:
 	rm sampleThesis.lot
 	rm sampleThesis.lof
 	rm sampleThesis.log
+	rm sampleThesis.bbl
