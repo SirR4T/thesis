@@ -7,18 +7,23 @@
 
 # Makefile for my changes.
 
-sampleThesis.pdf: abstract.tex certificate.tex chapter3.tex conclusion.tex paper.tex sampleThesis.tex acknowledgements.tex chapter2.tex chapter4.tex introduction.tex relatedPapers.tex titlePage.tex
+all: clean sampleThesis.pdf clean
+	git add .
+	git commit -am "by make"
+
+sampleThesis.pdf: abstract.tex certificate.tex chapter3.tex conclusion.tex paper.tex sampleThesis.tex acknowledgements.tex chapter2.tex chapter4.tex introduction.tex relatedPapers.tex titlePage.tex sampleBib.bib
 
 	 pdflatex sampleThesis.tex
 	 bibtex sampleThesis
 	 pdflatex sampleThesis.tex
+	 pdflatex sampleThesis.tex
 
 clean:
-	rm sampleThesis.pdf
-	rm sampleThesis.aux
-	rm sampleThesis.blg
-	rm sampleThesis.toc
-	rm sampleThesis.lot
-	rm sampleThesis.lof
-	rm sampleThesis.log
-	rm sampleThesis.bbl
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.pdf; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.aux; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.blg; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.toc; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.lot; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.lof; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.log; fi
+	if [ -f sampleThesis.pdf ]; then rm sampleThesis.bbl; fi

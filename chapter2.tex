@@ -6,6 +6,36 @@
 \subsection{Oblivious Transfer}
 \label{sec:ot-prim}
 
+Oblivious transfer is a type of protocol in which a sender sends a potential subset of messages to the 
+receiver but is oblivious as to whether which ones (if any) were received.
+
+Michael Rabin~\cite{Rabin81:HtESwOT} introduced the first kind of oblivious 
+transfer protocol, in which the sender sends a message with probability 
+$\frac{1}{2}$, but is oblivious whether the receiver received it or not. A more
+useful form of this protocol called the \emph{1-2 Oblivious Transfer} was
+developed by Shimon Even, Oded Goldreich and Abraham Lempel~\cite{Even:1985:RPS:3812.3818}.
+This protocol addresses the following problem: the sender has two messages 
+$m_0$ and $m_1$, and the receiver wants one of the messages $m_b$, but the 
+sender needs to remain oblivious about $b$, and the reciever needs to be 
+oblivious about the value of $m_{\bar{b}}$.
+
+\begin{algorithm}
+\caption{On 1-2 oblivious transfer}
+\label{algshare}
+\begin{algorithmic}
+\REQUIRE A has two messages, $m_0, m_1$, and wants to send exactly one of them to B, but does not want to know which B receives.
+\STATE A generates a RSA key pair, comprising the modulus $N$, the public exponent $e$ and the private exponent $d$
+\STATE A also generates two random values, $x_0, x_1$ and sends them to B 
+along with the public modulus and exponent.
+\STATE B picks $b$ to be either 0 or 1, and selects either the first or second $x_b$.
+\STATE B generates a random value $k$ and blinds $x_b$ by computing $v = (x_b + k^e)\mod N$, which he sends to A.
+\STATE A doesn't know which of $x_0$ and $x_1$ B chose, so she attempts to unblind with both of her random messages and comes up with two possible values for $k$: $k_0 = (v - x_0)^d\mod N$ and $k_1 = (v - x_1)^d\mod N$.  One of these will be equal to $k$ since it will correctly decrypt, while the other will produce another random value that does not reveal any information about $k$.
+\STATE A blinds the two secret messages with each of the possible keys, $m'_0 = m_0 + k_0$ and $m'_1 = m_1 + k_1$, and sends them both to B.
+\STATE B knows which of the two messages can be unblinded with $k$, so he is able to compute exactly one of the messages $m_b = m'_b - k$
+\ENSURE each player $i$ has a share $v_{i}$ of the secret $v$
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{Shamir's Secret Sharing}
 \label{sec:sss-prim}
 This SMPC primitive addresses the following problem: suppose a group of
