@@ -21,7 +21,7 @@ oblivious about the value of $m_{\bar{b}}$.
 
 \begin{algorithm}
 \caption{On 1-2 oblivious transfer}
-\label{algshare}
+\label{alg12ot}
 \begin{algorithmic}
 \REQUIRE A has two messages, $m_0, m_1$, and wants to send exactly one of them to B, but does not want to know which B receives.
 \STATE A generates a RSA key pair, comprising the modulus $N$, the public exponent $e$ and the private exponent $d$
@@ -35,6 +35,12 @@ along with the public modulus and exponent.
 \ENSURE each player $i$ has a share $v_{i}$ of the secret $v$
 \end{algorithmic}
 \end{algorithm}
+
+In the algorithm~\ref{12ot}, we show one possible implementation of 
+\emph{1-2 Oblivious Transfer} using the RSA cryptosystem~\cite{RSA78:AMfODSaPKC},
+	but in general, the oblivious transfer protocol can be implemented using
+	any ``trapdoor'' functions, such as one-way-functions and public key
+	cryptosystems, or even Shamir's secret sharing~\cite{SSR08:APfGOT}.
 
 \subsection{Shamir's Secret Sharing}
 \label{sec:sss-prim}
