@@ -88,6 +88,53 @@ is achieved.
 
 \subsubsection{Secret Addition}
 \label{sec:add-prim}
+Armed with the subroutines for secret sharing and reconstruction, we can
+do additional things with it. Notice that the ``share''s are but 
+numerical values, infact plot points on a polynomial curve. As with any 
+polynomial, we can add, multiply, and do other arithmetic operations, but
+what does adding polynomials mean, in this sense?
+
+What we mean by doing arithmetic operations on the polynomial is the 
+following:
+Supposing two secrets $a$ and $b$ were shared by two different players
+according to their choice of random private polynomials $f_{a}(x)$ and
+$f_{b}(x)$. Let the shares of the $i$~th player be $a_i$ and $b_i$
+respectively, of the two secrets. Now if the each of the individual players 
+were to add their own shares, this would result in each of them creating
+$c_i$, say, where $c_i = a_i + b_i$. But these individual shares 
+would be plot points on the polynomial curve 
+$f_{c}(x) = f_{a}(x) + f_{b}(x)$, which means that if the reconstruction
+subroutine were to be run on these new shares, it would result in the 
+reconstruction of the value $a+b$! And similar to the case of sharing 
+a secret, even when the shares are added, the privacy of the secret still
+remains intact, that is, all the players (except those two who shared $a$
+and $b$) still have no information about the value of the individual secrets.
+
+\begin{algorithm}
+\caption{Computing Secure Addition}
+\label{algadd}
+\begin{algorithmic}
+\REQUIRE $n$ is the number of players, each with private input $s_{i}$.
+\STATE \COMMENT{Phase 1: Sharing}
+\FOR{each player $i$}
+	\STATE Share secret $s_{i}$
+	\FOR{each player $j$}
+		\STATE send $j$'s share $s_{ij}$ to player $j$
+	\ENDFOR
+\ENDFOR
+\FOR{each player $j$}
+	\STATE $sum_{j} = \sum_{i=1}^{n}s_{ij} $
+\ENDFOR
+\ENSURE each player is left with $sum_j$, the share of the sum of the private
+inputs $s_{i}$.
+\end{algorithmic}
+\end{algorithm}
+
+This process is illustrated in the algorithm~\ref{algadd}, where each of the
+individual players share their private secrets, and add the individual shares.
+This results in the addition of each of the secrets, so that at the end of this
+routine, the group of individual players as a whole are each left with a share of
+the total sum of the private inputs of all of the players.
 
 \subsubsection{Secret Multiplication}
 \label{sec:mult-prim}
