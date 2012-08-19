@@ -36,7 +36,7 @@ along with the public modulus and exponent.
 \end{algorithmic}
 \end{algorithm}
 
-In the algorithm~\ref{12ot}, we show one possible implementation of 
+In the algorithm~\ref{alg12ot}, we show one possible implementation of 
 \emph{1-2 Oblivious Transfer} using the RSA cryptosystem~\cite{RSA78:AMfODSaPKC},
 	but in general, the oblivious transfer protocol can be implemented using
 	any ``trapdoor'' functions, such as one-way-functions and public key
@@ -77,6 +77,24 @@ the value of the ``share'' to be sent to each player $i$, as $f(i)$. With
 this, it is ensured that each player has a ``share'' of the secret, which
 he may reconstruct if and only if atleast $k-1$ other players are willing
 to do so.
+
+
+\begin{algorithm}
+\caption{On reconstructing a secret}
+\label{algrecon}
+\begin{algorithmic}
+\REQUIRE Each player has a share $v_{i}$ of the secret.
+	$\mathcal{P}$ is the set of players who wish to reconstruct the secret.
+\FOR{all players $i$}
+	\STATE all the players send their shares to players in $\mathcal{P}$
+\ENDFOR
+\FOR{all players in $\mathcal{P}$}
+	\STATE construct a polynomial $f(x) = a + bx$ which passes through all the points $(i,v_{i})$
+	\STATE return the secret $v = a$
+\ENDFOR
+\ENSURE each player knows the secret $v$
+\end{algorithmic}
+\end{algorithm}
 
 Notice, that
 a $k-1$ degree polynomial's equation can be reconstructed with the knowledge
@@ -130,14 +148,181 @@ inputs $s_{i}$.
 \end{algorithmic}
 \end{algorithm}
 
-This process is illustrated in the algorithm~\ref{algadd}, where each of the
-individual players share their private secrets, and add the individual shares.
-This results in the addition of each of the secrets, so that at the end of this
-routine, the group of individual players as a whole are each left with a share of
+This process is illustrated in the algorithm~\ref{algadd}, 
+where each of the
+individual players share their private secrets, 
+and add the individual shares.
+This results in the addition of each of the secrets, 
+so that at the end of this
+routine, the group of individual players as a whole are 
+each left with a share of
 the total sum of the private inputs of all of the players.
 
 \subsubsection{Secret Multiplication}
 \label{sec:mult-prim}
 
+For multiplication, we have a protocol given 
+by~\cite{GRR98:SVFMCwAtTC}, which takes multiple rounds 
+of communication, and 
+is a little complex. Here, we present a simple and elegant protocol, 
+with an initial preprocessing stage. The
+preprocessing uses the protocol of~\cite{GRR98:SVFMCwAtTC}, but 
+only once. All subsequent multiplications can be executed, using
+the protocol~\ref{algmult}. The advantage with this protocol is 
+that there is lesser communication complexity, 
+and the computation can be done on the local shares.
+
+We look at the simpler case of multiplying two secrets, 
+$\alpha$ and $\beta$, 
+which are assumed to be already shared among the $n$ players. 
+In the initial preprocessing stage, 
+we share two random numbers $x$ and $y$, and their product $xy$, 
+while keeping the values themselves secret. 
+The protocol given in ~\cite{GRR98:SVFMCwAtTC} is used to 
+calculate $xy$. 
+
+The numbers $\alpha$, $\beta$, $x$, $y$, $xy$ are now shared 
+among the players. Now each player $i$ computes the values 
+$\lambda_{i} =  \alpha_{i} - x_{i}$ and 
+$\lambda_{i}' = \beta_{i} - y_{i}$, where $\eta_{i}$ stands
+for the player $i$'s share of the value of $\eta$. Now the 
+    values of $\lambda$ and $\lambda'$ are 
+reconstructed, that is, made public among the players. This 
+affords no information gain about the values
+of $\alpha$ and $\beta$, as $x$ and $y$ are still private. 
+
+Due to the linearity of the secret sharing protocol, we know 
+that $\lambda = \alpha - x$ and $\lambda' = \beta - y$.
+Also, 
+\begin{eqnarray*}	
+	\alpha\beta 	& = & (\alpha - x + x)(\beta - y + y) \\
+			& = & (\alpha - x)(\beta - y) + y(\alpha - x) + x(\beta - y) + xy \\
+			& = & \lambda\lambda' + y\lambda + x\lambda' + xy
+\end{eqnarray*}
+
+Since the respective shares of $x$, $y$ and $xy$ are already 
+with the players, the computation of $\alpha\beta$
+(rather the computation of the \emph{shares} of $\alpha\beta$) can 
+be done locally. Since all the players have the shares of
+the product, the required product can be reconstructed easily. 
+This minimizes the cost of repeated multiplication,
+which is very communication expensive. Also, the shares of $x$ 
+and $y$ can be reused for all further multiplications,
+without any loss of information.
+
+\begin{algorithm}
+\caption{Computing Secure Multiplication}
+\label{algmult}
+\begin{algorithmic}
+\REQUIRE All the players have shares of random numbers $x$ and $y$ and their product $xy$.
+They also have shares of $\alpha$ and $\beta$, of which they need to evaluate the product.
+\STATE \COMMENT{Phase 1: SHARING}
+\FOR{player $i$}
+	\STATE  $\lambda_{i} = \alpha_{i} - x_{i}$
+	\STATE $\lambda_{i}' = \beta_{i} - y_{i}$
+	\STATE reconstruct the values $\lambda$ and $\lambda'$
+	\STATE $\alpha\beta_{i} = \lambda\lambda' + y_{i}\lambda + x_{i}\lambda' + xy_{i}$
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{Privacy Preserving Union}
 \label{sec:union-prim}
+
+Owing to the protocols given above for secure addition and multiplication, we can rest assured that 
+any algebraic function can be evaluated securely, since every function is but a series of repeated parametric
+additions and multiplications, and their inverses (subtractions and divisions). Also, assuming that every player
+can locally generate a random number, we can also safely say that every probabilistic polynomial time algorithm
+can be executed securely by the players. Formal proofs of these claims exist in literature, but they are out of 
+the scope of this paper. However, in addition to these protocols, we also present some specific purpose protocols
+such as this one for Secure Union.
+
+Let every player $i$ have a private set $S_{i}$, where $S_{i} \subset {S}$ is the universal set, of size $k$.
+Without loss of generality, we assume that the set ${S}$ is ordered, and that ${s_{i}| 1 \leq i \leq k}$ are 
+the elements. Each player creates a binary array, $A_{i} = [a_{ij}]$, where $a_{ij} = 1$ if $s_{j} \in S_{i}$ and $0$ otherwise.
+Now it remains to logically OR the arrays $A_{i}$ bitwise, and create the union set $U$. Note that, in binary operations, 
+the AND gate corresponds to multiplication, and the XOR gate corresponds to addition. We have already described protocols
+for multiplication and addition. The only difference here will be that the coefficients, operands and operations are in 
+binary logic. Also, the OR gate can be decomposed to the AND and XOR gate. And since we know the protocols for these
+gates, the OR gate can also be computed. The algorithm for the construction of secure union set is given below.
+
+\begin{algorithm}
+\caption{Constructing Secure Union}
+\label{algonion}
+\begin{algorithmic}
+\REQUIRE player $i$ has the array $A_{i} = [a_{ij}]$ which represents the set $S_{i}$
+\FOR{bit $j$ from $j = 1$ to $k$}
+	\FOR {all players}
+		\STATE share bit $a_{ij}$ in binary \COMMENT{Use the protocol~\ref{algadd}}
+		\STATE construct bit $XORa_{j} = {XOR}_{t=1}^{n}a_{ij}$ using protocol~\ref{algadd}
+		\STATE construct bit $ANDa_{j} = {AND}_{t=1}^{n}a_{ij}$ using protocol~\ref{algmult}
+		\STATE construct bit $ORa_{j} = XORa_{j} XOR ANDa_{j}$ using protocol~\ref{algadd}
+		\STATE element $u_{j} = ORa_{j}$
+	\ENDFOR
+\ENDFOR
+\STATE return set $U = \{u_{j}|j = 1 $ to $ k\}$
+\end{algorithmic}
+
+\end{algorithm}
+
+The protocol for secure intersection is similar to this, where instead of constructing the XOR of the 
+bits, just an AND of the bits is enough. Which is to say that a modified multiplication protocol will 
+be the same as a secure intersection protocol. 
+
+
+\subsection{Secure Maximisation}
+\label{sec:max}
+
+We suppose that the $n$ players each have a private input value, a probability, in the range $[0,1]$, and that
+they wish to find out the maximum value amongst them, and the player who holds it. The protocol mimics the binary 
+search over a given range. First, the interval is divided into two halves, $[0,0.5]$ and $[0.5,1]$, and the number of
+players in the greater interval are counted. Then, the interval with the largest value is subdivided into two halves,
+and the same process is repeated recursively, until only one player remains in the greater interval. This 
+value is then shared.
+
+\begin{algorithm}
+\caption{Maximisation of probabilities}
+\label{algmax}
+\begin{algorithmic}
+\REQUIRE each player has a private value $p_{i}$ within the range $[0,1]$
+\STATE $A = 0, B = 1$
+\LOOP
+\STATE $C = (A + B) / 2$
+\FOR{each player $i$}
+	\STATE $a_{i} = 0 $; $b_{i} = 0$
+	\IF{value $p_{i} < C$ }
+		\STATE $a_{i} = 1 $
+	\ELSE
+		\STATE $ b_{i} = 1$
+	\ENDIF
+	\STATE \COMMENT{Use the Secure Addition protocol~\ref{algadd}}
+	\STATE add all players' private $a_{i}$'s and $b_{i}$'s, call them $a$ and $b$
+	\STATE reconstruct $a$ and $b$
+	\IF{$b \geq 1$}
+		\STATE $A = C$ and continue loop
+	\ELSIF{$b = 1$}
+		\STATE exit loop \COMMENT{Player with max value found}
+	\ELSIF{$a \geq 1$}
+		\STATE $B = C$ and continue loop
+	\ELSE
+		\STATE exit loop \COMMENT{Player with max value found}
+	\ENDIF
+\ENDFOR
+\ENDLOOP
+\STATE \COMMENT{All players know for themselves whether they are or not the one with the max value}
+\FOR{all players $i$}
+	\IF{$a_{i} = 1$ or $b_{i} = 1$}
+		\STATE share value $p_{i}$
+	\ELSE
+		\STATE share $0$
+	\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+
+
+All the above mentioned algorithms and protocols end with the actual answer being shared. 
+For the answer to be revealed, one can always run the reconstruction algorithm (algorithm~\ref{algrecon}).
+
+
