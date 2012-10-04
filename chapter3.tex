@@ -25,16 +25,35 @@ any realistic scenario,
 due to the restrictions and limitations placed by determinism and the problem of uncertainty in the environment. This led researchers to conclude
 that robots needed a probabilistic model of information, and as a consequence, we see a paradigm shift in robotics research from deterministic
 robotics to probabilistic robotics, ever since the mid 1990s. What it translates into, is that at any given point in time, a robot does not have
-one deterministic answer to the second characteristic question \emph{Where am I?}, but instead, has a set of point locations with a probability 
-distribution, indicating the confidence with which it thinks it may be, in any of those locations. This is known as a position estimate. Given
+one deterministic answer for its location, but instead, has a guess - a set of point locations with a probability 
+distribution, indicating the confidence with which it thinks it may be, in any of those locations - which can also be visualized as a point cloud.
+This is known as a position estimate. Given
 a model of the environment, and the ability to estimate it's location (referred to as localization), a robot may traverse any part of the map.
+So the three things necessary for navigation are a model of the environment, a location estimate and a position estimate, which provide a
+platform to make decisions on where to move, and the capacity to update all these three based on new perspectives, or rather, new sensor data
+from the updated location.
 
 \section{Problems in Robotics}
 \label{sec:robo-problems}
+Some of the problems tackled in mobile robotics research may be categorized as ``mapping'', and ``localization''. Mapping may be thought of
+as the study of answering the first characteristic question, \emph{What does the world look like?}. It is answered by integrating the 
+information assimilated by sensors into a model of the environment, and depicting that model by a representation. Some of the major challenges
+in this field of study are representation of the environment, and interpretation of the sensor data.
+
+In contrast to the field of Mapping, the research studies in Localization try to answer the second characteristic question \emph{Where am I?},
+that is to say, estimating the location and pose of the robot, given a map of the world as a frame of reference. Some of the solution strategies
+are tracking, where the initial position of the robot is known, and global localization, in which no or only some a-priori knowledge of the 
+environment and the starting position are given.
+
+For true autonomy, one can see this becomes a chicken-and-egg problem: an unbiased map is needed for localization, while an accurate pose
+estimate is needed to build that map. That is, a solid answer to one of the characteristic questions will give rise to accurate estimations
+of the other, but an autonomous robot has a solid answer to neither one of the questions. This question is addressed in the field of study of 
+SLAM, or Simultaneous Localization and Mapping, in which strategies are developed to reinforce guesstimates of both pose and world map, based on
+the nature or characteristics of both the environment (unmanned aerial, underwater, indoors, traffic or terrain), and the sensing capabilities of
+the robot (radar, visual, infrared, sonic, etc).
 
 \section{Localization}
 \label{sec:robo-local}
 
 \section{Global Localization}
 \label{sec:robo-global}
-
