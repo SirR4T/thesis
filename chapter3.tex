@@ -1,7 +1,33 @@
 
-
 \section{Introduction to Robotics}
 \label{sec:robo-intro}
+The last few years have seen an increasing research interest and results in the field of robotics. Robotics and solutions from this field of
+research have pervaded almost every practical industry, ranging from extremely technical enterprises such as underwater and space exploration, to
+everyday mundane tasks such as household cleaning, or driving cars, and consequently are steadily replacing error prone human 
+intervention in these tasks. Earlier, they were largely restricted to working on assembly lines and industrial usage, where the tasks were
+repetitive and uniform. Lately though, as a consequence of recent research, many successful robotic solutions have been deployed to address 
+increasingly difficult tasks, many of them far more challenging than previously thought possible. The primary reason these tasks seem so
+challenging is the uncertainty in an environment, which renders deterministic systems and solutions useless. There can be multiple causes for
+uncertainty in any environment, and when it comes to robotics, it may be due to noise, precision of sensors, unpredictable events, or may even be 
+due to inaccurate modeling of the world. All of these reasons contribute towards a huge bottleneck in the process of developing robust systems
+and solutions across all domains. 
+
+This problem of uncertainty, in particular, also affects the domain of autonomous navigation - the ability of a robot to navigate without external
+aid - which is considered as the holy grail of mobile robotics. To be able to ``navigate'' in an environment, a robot must be able to ``see'' the 
+world as we see it, which is to say, understand what are obstacles and what are paths, construct a map of its surroundings, 
+recognize landmarks, move to a new location, and repeat the same process again. The term ``localization'' here is used broadly, meaning to 
+achieve a sense of the world or
+the map, and one's place (geographically) in it. One might even say, to move forward, one always needs to know where one is standing, and this 
+this assessment of actual location, or current standing, is what we mean by localization. Early robotic systems relied on the usage 
+of signalling, like
+beacons and human operators, to localize themselves. Being inherently deterministic processes, they were unable to approach true autonomy in
+any realistic scenario,
+due to the restrictions and limitations placed by determinism and the problem of uncertainty in the environment. This led researchers to conclude
+that robots needed a probabilistic model of information, and as a consequence, we see a paradigm shift in robotics research from deterministic
+robotics to probabilistic robotics, ever since the mid 1990s. What it translates into, is that at any given point in time, a robot does not have
+one deterministic answer to the second characteristic question \emph{Where am I?}, but instead, has a set of point locations with a probability 
+distribution, indicating the confidence with which it thinks it may be, in any of those locations. This is known as a position estimate. Given
+a model of the environment, and the ability to estimate it's location (referred to as localization), a robot may traverse any part of the map.
 
 \section{Problems in Robotics}
 \label{sec:robo-problems}
