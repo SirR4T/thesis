@@ -54,6 +54,38 @@ the robot (radar, visual, infrared, sonic, etc).
 
 \section{Localization}
 \label{sec:robo-local}
+As we can see, localization is one of the fundamental fields of research in mobile robotics. The earliest approaches made use of signals as
+beacons. The 1950s saw the development of the Automated Guided Vehicles (or AGVs), which were wire guided. They had a sensor attached to the 
+bottom of the platform, and a wire was placed in a slot cut in the ground. The sensors would track the radio frequency waves emitted from the
+wire, and this would help the AGV localize. Having to cut slots to place the wires would impede the flexibility in changing a course, and 
+this restricted the AGVs to follow a fixed path, which had to be laid beforehand. Between the 1960s and the 1970s, the Space Race spurred 
+research goals in robotics too, and as a consequence, robots such as the Stanford Cart, Shakey the robot and the Lunokhod 1 were developed. 
+The Stanford Cart was able to follow a white line with a television camera, and was initially attached with a long wire to a mainframe
+where the calculations were made, which was later replaced by a radio link. A human operator sitting at the mainframe would manually 
+control the robot via a television feed. 
+
+
+The AGVs evolved into the AGCs (Autonomous Guided Carts), which was simpler because they used magnetic tapes or coloured tapes, which incurred
+far lesser overhead when paths had to be changed, and more importantly, did not have to be remotely controlled. Although AGCs were autonomous,
+they did not truly use localization techniques, because the robots were not aware of their locations yet. It could be said that they were using 
+primitive tracking techniques, although tracking itself later evolved into a whole subdomain of research. These AGCs, although still
+limited by their line following, paved the way for future techniques and technologies by posing new challenges.
+
+To move forward from the limitations of a line-following robot, a robot had to have an idea of how far and in which direction it was moving, 
+say, from a given reference point. One intuitive way, called dead reckoning, stems from age old navigation methods, which says if you know
+a previously determined position, and if you can estimate the speed, time, and direction of travel from that point, you can estimate your new
+location. Techniques were devised to calculate the revolutions of the wheels, or to measure the force experienced during acceleration
+(Inertial Navigation Systems), but these techniques suffered from the inherent drawbacks of dead reckoning - the accumulation of errors in
+estimation was essentially unbounded. Based on these techniques, the first reliable localization system developed was based on beacons.
+The beacons provided a reliable frame of reference, and their locations was imbedded as a priori knowledge within the robot. The robot was 
+equipped with the suitable sensors, 
+
+
+%The Lunokhod 1 had four television cameras, two antennas, an X-ray
+%spectrometer and telescope, cosmic ray detectors and a laser device. It was able to relay back more than 20,000 TV images, around two hundred
+%high resolution panoramas, and twenty five soil analyses, and travelled a total distance of 10,540 metres. While the Stanford Cart and the 
+%Lunokhod 1 were controlled via remote relay, Shakey was the first robot that could reason about its own actions. 
+
 
 \section{Global Localization}
 \label{sec:robo-global}
