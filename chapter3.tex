@@ -72,13 +72,29 @@ primitive tracking techniques, although tracking itself later evolved into a who
 limited by their line following, paved the way for future techniques and technologies by posing new challenges.
 
 To move forward from the limitations of a line-following robot, a robot had to have an idea of how far and in which direction it was moving, 
-say, from a given reference point. One intuitive way, called dead reckoning, stems from age old navigation methods, which says if you know
+say, from a given reference point. One intuitive way, called ``dead reckoning'', stems from age old navigation methods, which says if you know
 a previously determined position, and if you can estimate the speed, time, and direction of travel from that point, you can estimate your new
 location. Techniques were devised to calculate the revolutions of the wheels, or to measure the force experienced during acceleration
 (Inertial Navigation Systems), but these techniques suffered from the inherent drawbacks of dead reckoning - the accumulation of errors in
 estimation was essentially unbounded. Based on these techniques, the first reliable localization system developed was based on beacons.
 The beacons provided a reliable frame of reference, and their locations was imbedded as a priori knowledge within the robot. The robot was 
-equipped with the suitable sensors, 
+equipped with the suitable sensors, which could observe the beacons, and thus used to achieve a reasonable pose estimate,
+based on the a priori location knowledge. This method did not have unbounded error growth, as the error could be reduced with accurate
+a priori knowledge. However, this scenario was not realistic, as reliance upon beacons and assumption of a priori knowledge about their
+positions implies that these beacons be easily recognizable, and that they be rigorous in terms of their positions. The Global Positioning
+System is one such example of this system, and is also used quite reliably in many traffic management situations. But the GPS system cannot be
+used in scenarios such as indoor environments, or situations where satellite signals are weak or receivers are not available. Also, the cost of 
+deploying such reliable beacons is prohibitive in terms of small scale projects, and reliance on GPS is not accurate enough for short distances
+(least count is too large).
+
+The rapid rise of technology, both in terms of accuracy and variety of sensors as well as algorithmic techniques to make sense of these data,
+has resulted in a sharp improvement of interfaces and functionality provided to control the robot. These techniques and technologies which
+have produced cheaper and more accurate sensors, and other factors such as faster computational speeds have widely encouraged research
+interests and efforts to improve the autonomy of remote agents, to the point of reducing human intervention to the minimum. The latest
+localization systems no longer rely on specially installed beacons, let alone human intervention, but instead create models of the current 
+environment, and use these models instead of beacons to estimate their current pose. These models of the environment are called features,
+and the process of creating these models from the sensor data is called feature extraction. 
+
 
 
 %The Lunokhod 1 had four television cameras, two antennas, an X-ray
